@@ -11,8 +11,7 @@ Leveraging the capabilities of pre-trained Transformer models from Hugging Face,
 - Error handling for unsupported language pairs
 
 ## Live App
-Access the app deployed on Hugging Face Spaces:  
-[View on Hugging Face Spaces](https://huggingface.co/spaces/JifanT/Language-Translator)
+View the App(https://huggingface.co/spaces/JifanT/Language-Translator)
 
 ## Supported Languages
 - **English**
