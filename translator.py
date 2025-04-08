@@ -1,13 +1,18 @@
 from transformers import pipeline
 
-def get_translator(src_lang="en", tgt_lang="fr"):
-    try:
-        model_name = f"Helsinki-NLP/opus-mt-{src_lang}-{tgt_lang}"
-        translator = pipeline("translation", model=model_name)
-        return translator
-    except Exception:
-        raise Exception(f"Translation model not available for {src_lang} → {tgt_lang}")
+MODEL_MAP = {
+    ("en", "fr"): "Helsinki-NLP/opus-mt-en-fr",
+    ("en", "es"): "Helsinki-NLP/opus-mt-en-es",
+    ("en", "de"): "Helsinki-NLP/opus-mt-en-de",
+    ("en", "hi"): "Helsinki-NLP/opus-mt-en-hi",
+    ("en", "ml"): "Helsinki-NLP/opus-mt-en-ml",
+}
+
+def get_translator(src_lang, tgt_lang):
+    model_name = MODEL_MAP.get((src_lang, tgt_lang))
+    if not model_name:
+        raise ValueError(f"Translation model not available for {src_lang} → {tgt_lang}")
+    return pipeline("translation", model=model_name)
 
 def translate_text(translator, text):
-    result = translator(text, max_length=400)
-    return result[0]['translation_text']
+    return translator(text)[0]['translation_text']
