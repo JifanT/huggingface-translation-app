@@ -6,7 +6,7 @@ Leveraging the capabilities of pre-trained Transformer models from Hugging Face,
 
 ## Features
 - Translate between multiple languages
-- Built with Hugging Face's state-of-the-art translation models
+- Built with Hugging Face's pre-trained translation models
 - Clean, interactive web interface using Streamlit
 - Error handling for unsupported language pairs
 
