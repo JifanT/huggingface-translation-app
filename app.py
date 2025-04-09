@@ -1,34 +1,33 @@
 import streamlit as st
 from translator import get_translator, translate_text
 
-# UI
-st.set_page_config(page_title="Language Translator", page_icon="🌍", layout="centered")
+st.set_page_config(page_title="🌍 Language Translator", layout="centered")
 st.title("🌍 Language Translator")
 
-# Language map
-language_names = {
-    "en": "English",
-    "fr": "French",
-    "es": "Spanish",
-    "de": "German",
-    "hi": "Hindi",
-    "ml": "Malayalam"
+# Language name-code map
+languages = {
+    "English": "en",
+    "French": "fr",
+    "Spanish": "es",
+    "German": "de",
+    "Hindi": "hi",
+    "Malayalam": "ml"
 }
 
-# Reverse map for dropdowns
-name_to_code = {v: k for k, v in language_names.items()}
+# Dropdowns for language selection
+src_lang = st.selectbox("Source Language", list(languages.keys()))
+tgt_lang = st.selectbox("Target Language", list(languages.keys()), index=1)
 
-src_lang_name = st.selectbox("Source Language", list(language_names.values()), index=0)
-tgt_lang_name = st.selectbox("Target Language", list(language_names.values()), index=1)
+# Text input
+text = st.text_area("Enter text to translate:")
 
-text_to_translate = st.text_area("Enter text to translate:")
-
+# Translate button
 if st.button("Translate"):
     try:
-        src = name_to_code[src_lang_name]
-        tgt = name_to_code[tgt_lang_name]
-        translator = get_translator(src, tgt)
-        result = translate_text(translator, text_to_translate)
-        st.success(result)
+        src_code = languages[src_lang]
+        tgt_code = languages[tgt_lang]
+        translator = get_translator(src_code, tgt_code)
+        translated_text = translate_text(translator, text)
+        st.success(translated_text)
     except Exception as e:
-        st.error(f"Error: {str(e)}")
+        st.error(f"Error: {e}")
