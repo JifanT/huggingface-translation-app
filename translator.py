@@ -11,7 +11,7 @@ MODEL_MAP = {
 def get_translator(src_lang, tgt_lang):
     model_name = MODEL_MAP.get((src_lang, tgt_lang))
     if not model_name:
-        raise ValueError(f"Translation model not available for {src_lang} → {tgt_lang}")
+        raise ValueError(f"Translation model not available for {src_lang} to {tgt_lang}")
     return pipeline("translation", model=model_name)
 
 def translate_text(translator, text):
